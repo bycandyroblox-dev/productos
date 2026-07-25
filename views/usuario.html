@@ -1,0 +1,23 @@
+<div class="panel-card">
+    <div class="panel-header"><i class="fas fa-plus-circle" style="color:var(--primary)"></i> Registrar producto a este responsable</div>
+    <div class="form-group">
+        <input type="text" class="form-control" id="new-product" placeholder="Descripción del producto...">
+        <input type="date" class="form-control" id="new-date" style="max-width: 200px;">
+        <button class="btn-primary" onclick="agregarProducto()"><i class="fas fa-cloud-upload-alt"></i> Subir a BD</button>
+    </div>
+</div>
+
+<div class="panel-card">
+    <div class="panel-header">
+        Lista de Asignaciones Personales
+        <div class="search-box"><i class="fas fa-search"></i><input type="text" id="searchInput" placeholder="Buscar mi producto..." onkeyup="renderizarTablaUsuario()"></div>
+    </div>
+    <div class="table-container">
+        <table>
+            <thead><tr><th style="width: 45%;">Producto</th><th>Fecha Expiración</th><th>Días Restan</th><th>Estado</th><th>Acciones</th></tr></thead>
+            <tbody id="table-body">
+                <!-- Se inyecta en JS -->
+            </tbody>
+        </table>
+    </div>
+</div>

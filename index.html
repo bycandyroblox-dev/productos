@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario Tambo Cloud Pro</title>
+    
+    <!-- Fuentes e Íconos -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Librerías -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <!-- Mis Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Indicador de Carga -->
+    <div id="loading-cloud"><i class="fas fa-sync fa-spin"></i> Sincronizando...</div>
+
+    <!-- PANTALLA LOGIN -->
+    <div id="loginView">
+        <div class="login-box">
+            <div class="logo-icon"><i class="fas fa-store-alt"></i></div>
+            <h2>Tambo ERP</h2>
+            <p>Acceso corporativo</p>
+            <div class="input-wrapper">
+                <i class="fas fa-user"></i>
+                <input type="text" id="username" placeholder="Usuario (tambo)">
+            </div>
+            <div class="input-wrapper">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Contraseña">
+            </div>
+            <button class="btn-login" onclick="iniciarSesion()">Ingresar</button>
+            <p id="error-msg"><i class="fas fa-times-circle"></i> Credenciales inválidas</p>
+        </div>
+    </div>
+
+    <!-- PANTALLA PRINCIPAL DE LA APP -->
+    <div id="appView" style="display: none;">
+        
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="brand"><i class="fas fa-boxes"></i><span>TamboPro</span></div>
+            
+            <p class="menu-label">VISTA GENERAL</p>
+            <ul class="nav-menu">
+                <li><a class="nav-link active" onclick="cargarVista('dashboard', 'general', this)"><i class="fas fa-chart-pie"></i> Dashboard Global</a></li>
+            </ul>
+
+            <p class="menu-label" style="margin-top: 20px;">EQUIPO</p>
+            <ul class="nav-menu">
+                <li><a class="nav-link" onclick="cargarVista('usuario', 'Susan', this)"><i class="fas fa-user-circle" style="color: #e91e63;"></i> Susan</a></li>
+                <li><a class="nav-link" onclick="cargarVista('usuario', 'Jhony', this)"><i class="fas fa-user-circle" style="color: #2196f3;"></i> Jhony</a></li>
+                <li><a class="nav-link" onclick="cargarVista('usuario', 'Johanna', this)"><i class="fas fa-user-circle" style="color: #9c27b0;"></i> Johanna</a></li>
+                <li><a class="nav-link" onclick="cargarVista('usuario', 'Britney', this)"><i class="fas fa-user-circle" style="color: #ff9800;"></i> Britney</a></li>
+                <li><a class="nav-link" onclick="cargarVista('usuario', 'Luciana', this)"><i class="fas fa-user-circle" style="color: #00bcd4;"></i> Luciana</a></li>
+            </ul>
+
+            <!-- NUEVO: Enlace de Configuración -->
+            <p class="menu-label" style="margin-top: 20px;">SISTEMA</p>
+            <ul class="nav-menu">
+                <li><a class="nav-link" onclick="cargarVista('configuracion', 'Admin', this)"><i class="fas fa-cog"></i> Configuración</a></li>
+            </ul>
+
+            <div class="user-profile" style="margin-top: auto;">
+                <div class="user-info">
+                    <div class="avatar"><i class="fas fa-cloud"></i></div>
+                    <div class="user-name">
+                        <p>Tambo Admin</p>
+                        <span style="color:var(--success)">En línea 🟢</span>
+                    </div>
+                </div>
+                <button class="btn-logout" onclick="cerrarSesion()" title="Cerrar sesión"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </div>
+
+        <!-- CONTENIDO DINÁMICO (Aquí se inyectan las vistas) -->
+        <div class="main-content">
+            <div class="page-header">
+                <h1 id="page-title">Cargando...</h1>
+                <div class="date-display" id="current-date"></div>
+            </div>
+            
+            <!-- Contenedor donde se insertará el HTML de las vistas -->
+            <div id="vista-contenedor"></div>
+        </div>
+    </div>
+
+    <!-- Scripts (El orden importa) -->
+    <script src="js/firebase.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
