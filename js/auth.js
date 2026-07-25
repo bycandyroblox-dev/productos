@@ -5,7 +5,7 @@ document.getElementById('password').addEventListener('keypress', e => {
 function iniciarSesion() {
     const u = document.getElementById('username').value;
     const p = document.getElementById('password').value;
-    const claveActual = localStorage.getItem('tambo_pass') || 'tambo';
+    const claveActual = localStorage.getItem('tambo_pass') || 'elvira';
 
     if (u === 'tambo' && p === claveActual) {
         document.getElementById('loginView').style.display = 'none';
