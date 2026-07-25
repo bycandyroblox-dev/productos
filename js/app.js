@@ -30,18 +30,18 @@ function calcularDias(fechaExpiracion) {
     hoy.setHours(0,0,0,0);
     const exp = new Date(fechaExpiracion); 
     exp.setMinutes(exp.getMinutes() + exp.getTimezoneOffset());
+    return Math.ceil((exp - hoy) / (1000 * 60 * 60 * 24));
+}
+
+function getEstadoObj(dias) {
+    // NUEVA REGLA: Si faltan 5 días o menos, ya se considera Vencido/Caducado
+    if(dias <= 5) return { t: 'Vencido', c: 'b-vencido', i: 'fa-times' };
     
-    // Calculamos los días reales que faltan
-    const diasReales = Math.ceil((exp - hoy) / (1000 * 60 * 60 * 24));
+    // Si faltan entre 6 y 15 días, es Crítico
+    if(dias <= 15) return { t: 'Crítico', c: 'b-critico', i: 'fa-exclamation' };
     
-    // REGLA ESTRICTA: Si faltan 5 días o menos (o si ya pasó la fecha), 
-    // forzamos a que el sistema muestre 0 días.
-    if (diasReales <= 5) {
-        return 0;
-    }
-    
-    // Si faltan más de 5 días, muestra los días normales
-    return diasReales;
+    // Si faltan más de 15 días, es Bueno
+    return { t: 'Bueno', c: 'b-bueno', i: 'fa-check' };
 }
 
 // ==========================================
